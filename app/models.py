@@ -1,4 +1,5 @@
 from . import db
+import datetime
 
 
 class UserProfile(db.Model):
@@ -9,9 +10,17 @@ class UserProfile(db.Model):
     __tablename__ = 'user_profiles'
 
     id = db.Column(db.Integer, primary_key=True)
-    first_name = db.Column(db.String(80))
-    last_name = db.Column(db.String(80))
-    username = db.Column(db.String(80), unique=True)
+    fname = db.Column(db.String(40))
+    lname = db.Column(db.String(40))
+    email = db.Column(db.String(80), unique=True)
+    location = db.Column(db.String(80))
+    gender = db.Column(db.String(6))
+    biography = db.Column(db.String(256))
+    image = db.Column(db.String(40))
+    # username = db.Column(db.String(80), unique=True)
+    
+    def __init__(self, fname, fname, email, location, gender, bio, img):
+        self.
 
     def is_authenticated(self):
         return True
