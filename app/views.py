@@ -35,8 +35,9 @@ def about():
     
 @app.route('/profiles')
 def profiles():
-    profiles = db.session.query(UserProfile).all()
-    render_template('profiles.html',profiles = profiles)
+    # profiles = db.session.query(UserProfile).all()
+    profiles = UserProfile.query.all()
+    return render_template('profiles.html', profiles = profiles)
 
 
 @app.route('/profile/<int:userid>')
@@ -67,12 +68,13 @@ def profile():
             request.form['email'],
             request.form['location'],
             request.form['gender'],
-            request.form['biography'],
+            request.form['bio'],
             filename,
+            # datetime.datetime.now()
             datetime.datetime.now().strftime("%B %d, %Y")
         )
         
-        db.session(user)
+        db.session.add(user)
         db.session.commit()
         
         flash('Profile Saved', 'success')

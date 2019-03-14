@@ -18,6 +18,7 @@ class UserProfile(db.Model):
     biography = db.Column(db.String(256))
     image = db.Column(db.String(40))
     timeStamp = db.Column(db.String(40))
+    # timeStamp = db.Column(db.DateTime(40))# ask about this
     
     # username = db.Column(db.String(80), unique=True)
     
