@@ -17,10 +17,19 @@ class UserProfile(db.Model):
     gender = db.Column(db.String(6))
     biography = db.Column(db.String(256))
     image = db.Column(db.String(40))
+    timeStamp = db.Column(db.String(40))
+    
     # username = db.Column(db.String(80), unique=True)
     
-    def __init__(self, fname, fname, email, location, gender, bio, img):
-        self.
+    def __init__(self, fname, lname, email, location, gender, bio, fileName, time):
+        self.fname = fname
+        self.lname = lname
+        self.email = email
+        self.location = location
+        self.gender = gender
+        self.biography = bio
+        self.image = fileName
+        self.timeStamp = time
 
     def is_authenticated(self):
         return True

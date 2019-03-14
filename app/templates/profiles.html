@@ -2,7 +2,7 @@
 
 {% block main %} 
     <h2>Profiles</h2>
-    
+    {% include "flash_messages.html" %}
     {% for profile in profiles %}
         <div class="profile-card">
             <img src="{{ url_for('static', filename='images/'+profile.image) }}"></img>
@@ -17,7 +17,7 @@
                     {{ profile.location }}
                 </div>
             </div>
-            <a href="{{ url_for('view-profile') }}" class="view-profile"></a>
+            <a href="{{ url_for('view-profile',userid=profile.id) }}" class="view-profile"></a>
         </div>
     {% endfor %}
 {% endblock %}

@@ -6,11 +6,12 @@ This file creates your application.
 """
 
 
-from app import app, db, login_manager
+from app import app, db
 from flask import render_template, request, redirect, url_for, flash
 from flask_login import login_user, logout_user, current_user, login_required
 from app.forms import ProfileForm
 from app.models import UserProfile
+import datetime
 
 path = app.config['UPLOAD_FOLDER']
 
@@ -34,17 +35,45 @@ def about():
     
 @app.route('/profiles')
 def profiles():
-    render_template('profiles.html')
+    profiles = db.session.query(UserProfile).all()
+    render_template('profiles.html',profiles = profiles)
 
+
+@app.route('/profile/<int:userid>')
+def show_profile(userid):
+    user = db.session.query(UserProfile).get(userid)
+    return render_template('show_profile.html', user=user)
 
 @app.route("/profile", methods=["GET", "POST"])
 def profile():
     form = ProfileForm()
     if request.method == "POST" and form.validate_on_submit():
         
+        # fname = form.fname.data
+        # lname = form.lname.data
+        # email = form.email.data
+        # location = form.location.data
+        # gender = form.gender.data
+        # biography = form.biography.data
+        
+        
         file = form.image.data
         filename = secure_filename(file.filename)
         file.save(os.path.join(path, filename))
+        
+        user = UserProfile(
+            request.form['fname'],
+            request.form['lname'],
+            request.form['email'],
+            request.form['location'],
+            request.form['gender'],
+            request.form['biography'],
+            filename,
+            datetime.datetime.now().strftime("%B %d, %Y")
+        )
+        
+        db.session(user)
+        db.session.commit()
         
         flash('Profile Saved', 'success')
         return redirect(url_for("profiles")) 
