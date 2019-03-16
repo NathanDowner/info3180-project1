@@ -15,7 +15,7 @@ class UserProfile(db.Model):
     email = db.Column(db.String(80), unique=True)
     location = db.Column(db.String(80))
     gender = db.Column(db.String(6))
-    biography = db.Column(db.String(256))
+    biography = db.Column(db.String(1000))
     image = db.Column(db.String(40))
     timeStamp = db.Column(db.String(40))
     # timeStamp = db.Column(db.DateTime(40))# ask about this

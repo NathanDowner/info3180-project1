@@ -3,47 +3,57 @@
 {% block main %}
   <div class="login-form center-block">
     <h2>Add Profile</h2>
-    {% include 'flash_messages.html' %}
     <form action="{{ url_for('profile') }}" method="post" enctype="multipart/form-data" novalidate>
       {{ form.csrf_token }}
       
-      <div class="form-group">
-        {{ form.fname.label }}
-        {{ form.fname(class='form-control') }}
-      {% for message in form.fname.errors %}
-        <small class="form-text text-muted">{{ message }}</small>
-      {% endfor %}
+      <div class="form-row">
+        <div class="col">
+          <div class="form-group">
+            {{ form.fname.label }}
+            {{ form.fname(class='form-control') }}
+          {% for message in form.fname.errors %}
+            <small>{{ message }}</small>
+          {% endfor %}
+          </div>
+        </div>
+        
+        <div class="col">
+          <div class="form-group">
+            {{ form.lname.label }}
+            {{ form.lname(class='form-control') }}
+            {% for message in form.lname.errors %}
+              <small>{{ message }}</small>
+            {% endfor %}
+          </div>
+        </div>
       </div>
       
-      <div class="form-group">
-        {{ form.lname.label }}
-        {{ form.lname(class='form-control') }}
-        {% for message in form.lname.errors %}
-          <small class="form-text text-muted">{{ message }}</small>
-        {% endfor %}
-      </div>
-      
-      <div class="form-group">
-        {{ form.gender.label }}
-        {{ form.gender(class='form-control') }}
-        {% for message in form.gender.errors %}
-          <small class="form-text text-muted">{{ message }}</small>
-        {% endfor %}
-      </div>
-      
-      <div class="form-group">
-        {{ form.email.label }}
-        {{ form.email(class='form-control') }}
-        {% for message in form.email.errors %}
-          <small class="form-text text-muted">{{ message }}</small>
-        {% endfor %}
+      <div class="form-row">
+        <div class="col">
+          <div class="form-group">
+            {{ form.gender.label }}
+            {{ form.gender(class='form-control') }}
+            {% for message in form.gender.errors %}
+              <small>{{ message }}</small>
+            {% endfor %}
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-group">
+            {{ form.email.label }}
+            {{ form.email(class='form-control') }}
+            {% for message in form.email.errors %}
+              <small>{{ message }}</small>
+            {% endfor %}
+          </div>
+        </div>
       </div>
       
       <div class="form-group">
         {{ form.location.label }}
         {{ form.location(class='form-control') }}
         {% for message in form.location.errors %}
-          <small class="form-text text-muted">{{ message }}</small>
+          <small>{{ message }}</small>
         {% endfor %}
       </div>
       
@@ -51,19 +61,22 @@
         {{ form.bio.label }}
         {{ form.bio(class='form-control') }}
         {% for message in form.bio.errors %}
-          <small class="form-text text-muted">{{ message }}</small>
+          <small>{{ message }}</small>
         {% endfor %}
       </div>
       
       <div class="form-group">
         {{ form.image.label }}
-        {{ form.image(class="form-control") }}
+        {{ form.image(class="form-control-file") }}
         {% for message in form.image.errors %}
-          <small class="form-text text-muted">{{ message }}</small>
+          <small>{{ message }}</small>
         {% endfor %}
       </div>
-    
-      <button type="submit" name="submit" class="btn btn-primary btn-block">Log in</button>
+      <div class="row">
+        <div class="col-md-4 col-sm-10">
+          <button type="submit" name="submit" class="btn btn-primary btn-block">Add Profile</button>
+        </div>
+      </div>
     </form>
   </div>
 {% endblock %}

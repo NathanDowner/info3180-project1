@@ -27,7 +27,6 @@ def home():
     """Render website's home page."""
     return render_template('home.html')
 
-
 @app.route('/about/')
 def about():
     """Render the website's about page."""
@@ -35,8 +34,8 @@ def about():
     
 @app.route('/profiles')
 def profiles():
-    # profiles = db.session.query(UserProfile).all()
-    profiles = UserProfile.query.all()
+    profiles = db.session.query(UserProfile).all()
+    # profiles = UserProfile.query.all()
     return render_template('profiles.html', profiles = profiles)
 
 
